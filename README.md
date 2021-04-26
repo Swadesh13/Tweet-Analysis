@@ -1,2 +1,2 @@
-# twitter-data-collection
-Code for retrieving useful tweets from Twitter
+# Twitter Data Analysis
+Code for retrieving and analysing useful tweets from Twitter.
