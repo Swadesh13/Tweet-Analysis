@@ -1,4 +1,4 @@
-name: Tweet-Analysis
+name: env
 channels:
   - defaults
 dependencies:
