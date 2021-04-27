@@ -1,4 +1,13 @@
 # Twitter Data Analysis
+![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)
+![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103) 
+![](https://img.shields.io/github/languages/top/Swadesh13/Tweet-Analysis)
+![Versions](https://img.shields.io/pypi/pyversions/pandas)
+![Last Commit](https://img.shields.io/github/last-commit/Swadesh13/Tweet-Analysis)
+![GitHub Pull Request](https://img.shields.io/github/issues-raw/Swadesh13/Tweet-Analysis)
+![GitHub forks](https://img.shields.io/github/forks/Swadesh13/Tweet-Analysis?label=Fork&style=social)
+![Stars](https://img.shields.io/github/stars/Swadesh13/Tweet-Analysis)
+
 Code for retrieving and analysing useful tweets from Twitter.
 
 ## Setup
