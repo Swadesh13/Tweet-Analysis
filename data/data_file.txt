@@ -1,0 +1,19 @@
+----------------------------------------
+Tweets Collected for time range -
+Start Time: 2021-03-30T10:00:00Z
+End Time: 2021-03-30T12:00:00Z
+
+Exec Start Time: 02:07:11
+Query / topic Tweet Counts: 
+
+Query Tag corona bengal: 23
+Query Tag covid bengal: 20
+topic COVID19: 43
+
+Exec End Time: 02:11:11
+Total tweets: 43
+WB Count: 0
+Not WB Count: 33
+Not hi_en_bn Count: 10 consisting of in WB: 0  outside WB: 10
+Last Token (if any): None
+Last query: covid bengal

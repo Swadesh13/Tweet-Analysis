@@ -18,13 +18,13 @@ LOCATIONS = ["west bengal", "bengal", "kolkata", "siliguri", "asansol", "durgapu
 # Schema is as follows- {"topic": ["string_query1", "string_query2", ...]}
 QUERIES = {}
 
-with open(os.getcwd() + "/data/queries.json") as jsonf:
+with open(os.getcwd() + "/data/json/queries.json") as jsonf:
     QUERIES = json.load(jsonf)
     jsonf.close()
 
 # Start and End time for the tweets
 START_TIME = "2021-03-30T10:00:00Z"
-END_TIME = "2021-03-30T14:00:00Z"
+END_TIME = "2021-03-30T12:00:00Z"
 
 # Parameters to be passed to search tweets API
 TWEET_PARAMS = {
@@ -42,12 +42,12 @@ USER_PARAMS = {
 # Get Locations and Users data from previously saved csv file
 # * Location Schema - {"id":"eg_id", "location": "eg_loc"}
 try:
-    locations_from_api = json.loads(pd.read_csv(os.getcwd() + "/data/locations_from_api.csv", index_col="id").to_json(orient="table"))["data"]
+    locations_from_api = json.loads(pd.read_csv(os.getcwd() + "/data/csv/locations_from_api.csv", index_col="id").to_json(orient="table"))["data"]
 except:
     locations_from_api = []
 
 # * User Schema - {"id":"eg_id", "description": "eg_desc", "location": "eg_loc"}
 try:
-    users_from_api = json.loads(pd.read_csv(os.getcwd() + "/data/users_from_api.csv", index_col="id").to_json(orient="table"))["data"]
+    users_from_api = json.loads(pd.read_csv(os.getcwd() + "/data/csv/users_from_api.csv", index_col="id").to_json(orient="table"))["data"]
 except:
     users_from_api = []

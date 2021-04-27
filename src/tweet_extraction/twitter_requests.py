@@ -1,13 +1,14 @@
 # twitter_requests.py
 # Requests to the Twitter API
 
+from typing import Union
 import requests
 from time import strftime, localtime
 import traceback
 from auth import OAuth1, BearerAuth
 from utils import get_creds
 from error_handling import handle_response_error, check_json, if_continue
-from config import URL, USER_PARAMS, users_from_api, locations_from_api
+from config import LOCATIONS, URL, USER_PARAMS
 
 __creds__ = get_creds()
 
@@ -77,7 +78,7 @@ def get_all_tweets(params: dict)-> dict:
             return get_all_tweets(params)
 
 
-def get_user(user_id: str) -> dict:
+def get_user(user_id: str, users_from_api: list) -> dict:
     '''
     GET the user from twitter users api
 
@@ -167,7 +168,7 @@ def get_user(user_id: str) -> dict:
             return get_user(user_id)
 
 
-def get_location_from_geo(place_id: str) -> str:
+def get_location_from_geo(place_id: str, locations_from_api: list) -> str:
     '''
         GET Request to Twitter V1.1 API Endpoint
 
@@ -245,3 +246,58 @@ def get_location_from_geo(place_id: str) -> str:
         elif cont == 2:
             print("Trying Again!")
             return get_location_from_geo(place_id)
+
+
+def get_location_(user_id: str, users_from_api: list)-> bool:
+    '''
+        Function that returns obtained locations based on either tweet or user loaction / decription.
+
+        Args:
+        user_id - User ID for the person
+
+        Returns:
+
+    '''
+    within_wb = False
+    loc = ""
+    user = get_user(user_id, users_from_api)
+
+    desc_is = True
+    try:
+        _ = user["description"].lower()
+    except:
+        desc_is = False
+
+    try:
+        loc = " ".join(user["location"].lower().split())
+        if loc.strip() == "na":     # if user entered NA for get_user()
+            raise Exception
+        for l in LOCATIONS:
+            if l in loc:
+                within_wb = True
+                break
+    except:
+        if desc_is:
+            desc = user["description"].lower()
+            if(desc):
+                for l in LOCATIONS:
+                    if l in desc:
+                        within_wb = True
+                        loc += l + " "
+
+    return loc, within_wb
+
+
+
+def get_location(tdata: dict, locations_from_api:list, users_from_api:list) -> Union[str, bool]:
+    is_wb = False
+    try:
+        loc = get_location_from_geo(tdata["geo"]["place_id"], locations_from_api)
+        if loc:
+            for l in LOCATIONS:
+                if l in loc:
+                    is_wb = True
+    except:
+        loc, is_wb = get_location_(tdata["author_id"], users_from_api)
+
+    return loc, is_wb

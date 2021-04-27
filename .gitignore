@@ -3,7 +3,7 @@ test.py
 
 # JSON Files
 credentials.json
-queries.json
+queries_.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

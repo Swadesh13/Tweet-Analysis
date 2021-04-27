@@ -3,6 +3,7 @@
 
 import requests
 from requests_oauthlib import OAuth1Session
+import traceback
 
 class BearerAuth(requests.auth.AuthBase):
     '''
@@ -29,13 +30,14 @@ class OAuth1(OAuth1Session):
     def __init__(self, tokens: dict):
         self.tokens = tokens
         try:
-            if all(token in self.tokens for token in ["client_key", "client_scret", "resource_owner", "resource_owner_secret"]):
-                return super().__init__(tokens["client_key"], tokens["client_secret"], tokens["resource_owner_key"], tokens["resource_owner_secret"])
-            elif all(token in self.tokens for token in ["client_key", "client_scret"]):
+            if all(token in tokens.keys() for token in ["client_key", "client_secret", "resource_owner", "resource_owner_secret"]):
+                return super().__init__(tokens["client_key"], tokens["client_secret"], tokens["resource_owner"], tokens["resource_owner_secret"])
+            elif all(token in tokens.keys() for token in ["client_key", "client_secret"]):
                 return super().__init__(tokens["client_key"], tokens["client_secret"])
             else:
                 raise KeyError()
         except KeyError:
+            traceback.print_exc()
             print("Require atleast 2 tokens: client_key, client_secret")
             exit()
         except Exception as err:
